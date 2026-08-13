@@ -1,0 +1,319 @@
+{
+  "$schema_version": "1",
+  "meta": {
+    "updated": "2026-08-13",
+    "context_doc": "SPEC.md",
+    "note": "검사 설비 현황 모니터링 시스템 작업 SSOT — 상세 기준은 각 작업의 summary와 note에 있다"
+  },
+  "enums": {
+    "status": [
+      "todo",
+      "in_progress",
+      "blocked",
+      "done"
+    ],
+    "priority": [
+      "핵심",
+      "검증",
+      "나중"
+    ],
+    "category": [
+      "환경",
+      "화면",
+      "저장",
+      "검증"
+    ]
+  },
+  "tasks": [
+    {
+      "id": "LB-101",
+      "status": "done",
+      "priority": "핵심",
+      "category": "환경",
+      "title": "Next.js 최소 구성 세팅",
+      "summary": "완료: npm run dev로 http://localhost:3000 에서 빈 페이지가 뜬다",
+      "where": ".",
+      "parent": null,
+      "deps": [],
+      "doc": null,
+      "done_at": null,
+      "note": "create-next-app은 폴더에 PLAN.md·SPEC.md·.git이 이미 있어 실패하므로 쓰지 않는다. npm init -y 후 next·react·react-dom을 설치하고 app/layout.tsx·app/page.tsx를 직접 만든다"
+    },
+    {
+      "id": "LB-102",
+      "status": "done",
+      "priority": "핵심",
+      "category": "환경",
+      "title": "Tailwind CSS 설정",
+      "summary": "완료: 임의 엘리먼트에 bg-red-500 같은 tailwind 클래스를 주면 브라우저에 색이 반영된다",
+      "where": ".",
+      "parent": null,
+      "deps": [
+        "LB-101"
+      ],
+      "doc": null,
+      "done_at": null,
+      "note": "SPEC.md 색상 규칙(녹색/노란색/빨간색)에 쓸 색상 팔레트를 tailwind.config에서 한 번만 정의해 재사용한다"
+    },
+    {
+      "id": "LB-103",
+      "status": "todo",
+      "priority": "핵심",
+      "category": "화면",
+      "title": "대시보드 뼈대 페이지",
+      "summary": "완료: `/` 접속 시 \"대시보드\" 제목과 빈 레이아웃이 뜬다",
+      "where": "app/page.tsx",
+      "parent": null,
+      "deps": [
+        "LB-102"
+      ],
+      "doc": null,
+      "done_at": null,
+      "note": "이 단계에서는 데이터 없이 뼈대만 — 실제 카드 렌더링은 LB-109에서 붙인다"
+    },
+    {
+      "id": "LB-104",
+      "status": "todo",
+      "priority": "핵심",
+      "category": "저장",
+      "title": "데이터 타입 정의",
+      "summary": "완료: lib/types.ts에 LogRecord 타입이 정의되고, 다른 파일에서 타입 에러 없이 import된다",
+      "where": "lib/types.ts",
+      "parent": null,
+      "deps": [
+        "LB-101"
+      ],
+      "doc": "SPEC.md#데이터-구조",
+      "done_at": null,
+      "note": "필드명·순서는 SPEC.md 데이터 구조 표를 그대로 따른다 (timestamp/line/position/status/cause/actionStatus/note)"
+    },
+    {
+      "id": "LB-105",
+      "status": "todo",
+      "priority": "핵심",
+      "category": "저장",
+      "title": "파이프 구분 텍스트 파서 작성",
+      "summary": "완료: 샘플 한 줄을 파서에 넣으면 LogRecord 객체가 반환되는 것을 콘솔 출력으로 확인할 수 있다",
+      "where": "lib/data.ts",
+      "parent": null,
+      "deps": [
+        "LB-104"
+      ],
+      "doc": "SPEC.md#데이터-구조",
+      "done_at": null,
+      "note": "필드 순서는 SPEC.md 헤더 순서로 고정한다. 원인·조치상태·비고는 값이 없으면 undefined로 처리한다 (JSON이 아닌 원본 표 형식 유지)"
+    },
+    {
+      "id": "LB-106",
+      "status": "todo",
+      "priority": "핵심",
+      "category": "저장",
+      "title": "설비 현재 상태 샘플 데이터 생성",
+      "summary": "완료: data/equipment-status.txt 파일이 생성되고 18줄(정상 9, 멈춤·알람 9)이 있다",
+      "where": "data/equipment-status.txt",
+      "parent": null,
+      "deps": [
+        "LB-105"
+      ],
+      "doc": "SPEC.md#데이터-구조",
+      "done_at": null,
+      "note": "라인 1~9 × 정면/배면 각 1건씩 총 18건, 시간은 현재 시각 기준. 이 파일은 스냅샷 전용이며 이력은 LB-107에 따로 둔다"
+    },
+    {
+      "id": "LB-107",
+      "status": "todo",
+      "priority": "핵심",
+      "category": "저장",
+      "title": "알람 이력 샘플 데이터 생성",
+      "summary": "완료: data/alarm-history.txt에 최근 며칠간 알람·멈춤 이벤트가 20건 이상 있다",
+      "where": "data/alarm-history.txt",
+      "parent": null,
+      "deps": [
+        "LB-105"
+      ],
+      "doc": "SPEC.md#데이터-구조",
+      "done_at": null,
+      "note": "같은 설비의 가장 최근 이력 상태는 equipment-status.txt의 스냅샷 상태와 일치해야 한다"
+    },
+    {
+      "id": "LB-108",
+      "status": "todo",
+      "priority": "핵심",
+      "category": "화면",
+      "title": "EquipmentCard 컴포넌트 (텍스트 버전)",
+      "summary": "완료: 카드 하나에 라인 번호·정면/배면 구분·상태 텍스트가 표시된다",
+      "where": "components/EquipmentCard.tsx",
+      "parent": null,
+      "deps": [
+        "LB-103",
+        "LB-106"
+      ],
+      "doc": null,
+      "done_at": null,
+      "note": "색상 적용은 아직 하지 않는다 (LB-114에서 붙임) — 이 단계는 데이터가 화면에 뜨는 것만 확인"
+    },
+    {
+      "id": "LB-109",
+      "status": "todo",
+      "priority": "핵심",
+      "category": "화면",
+      "title": "LineRow로 대시보드 18개 카드 렌더링",
+      "summary": "완료: `/` 접속 시 9개 라인이 위에서부터 순서대로 나오고, 각 라인에 정면/배면 카드 2개씩 총 18개가 보인다",
+      "where": "components/LineRow.tsx",
+      "parent": null,
+      "deps": [
+        "LB-108"
+      ],
+      "doc": "SPEC.md#완료-조건",
+      "done_at": null,
+      "note": "라인 순서는 1→9 고정. 정면이 항상 왼쪽, 배면이 오른쪽으로 위치를 통일한다"
+    },
+    {
+      "id": "LB-110",
+      "status": "todo",
+      "priority": "핵심",
+      "category": "화면",
+      "title": "종합 이력 페이지",
+      "summary": "완료: `/history` 접속 시 최근 알람 20건이 시간·라인·설비·상태 컬럼을 가진 표로 최신순 정렬되어 보인다",
+      "where": "app/history/page.tsx",
+      "parent": null,
+      "deps": [
+        "LB-103",
+        "LB-107"
+      ],
+      "doc": "SPEC.md#완료-조건",
+      "done_at": null,
+      "note": "정렬 기준은 timestamp 내림차순 하나뿐이다 — 다른 정렬 옵션은 이번 범위 아님"
+    },
+    {
+      "id": "LB-111",
+      "status": "todo",
+      "priority": "핵심",
+      "category": "화면",
+      "title": "설비별 상세 이력 페이지",
+      "summary": "완료: 대시보드에서 설비 카드를 클릭하면 그 설비의 알람 발생 시각·원인·조치 내용이 시간순으로 뜬다",
+      "where": "app/equipment/[line]/[position]/page.tsx",
+      "parent": null,
+      "deps": [
+        "LB-109",
+        "LB-107"
+      ],
+      "doc": "SPEC.md#완료-조건",
+      "done_at": null,
+      "note": "조치 내용(note)은 샘플 데이터에 미리 들어있는 텍스트를 그대로 보여줄 뿐, 화면에서 입력·수정하지 않는다"
+    },
+    {
+      "id": "LB-112",
+      "status": "todo",
+      "priority": "핵심",
+      "category": "저장",
+      "title": "가동률 계산 함수",
+      "summary": "완료: 특정 라인 또는 전체의 일별 가동률(%) 숫자를 콘솔 출력으로 확인할 수 있다",
+      "where": "lib/data.ts",
+      "parent": null,
+      "deps": [
+        "LB-107"
+      ],
+      "doc": "SPEC.md#완료-조건",
+      "done_at": null,
+      "note": "가동률 = 정상 상태로 기록된 시간 비율. 계산식은 이 함수 하나에만 두고 화면 쪽에서 재계산하지 않는다"
+    },
+    {
+      "id": "LB-113",
+      "status": "todo",
+      "priority": "핵심",
+      "category": "화면",
+      "title": "통계 화면",
+      "summary": "완료: `/stats` 접속 시 전체·라인별 가동률이 그래프로 보이고 그 아래 상세 표도 함께 보인다",
+      "where": "app/stats/page.tsx",
+      "parent": null,
+      "deps": [
+        "LB-112",
+        "LB-103"
+      ],
+      "doc": "SPEC.md#완료-조건",
+      "done_at": null,
+      "note": "전체 현황과 라인별 현황을 그래프에서 구분해서 보여준다 (하나로 합치지 않는다)"
+    },
+    {
+      "id": "LB-114",
+      "status": "todo",
+      "priority": "검증",
+      "category": "검증",
+      "title": "상태 색상 우선순위 규칙 적용",
+      "summary": "완료: 같은 설비가 알람과 멈춤을 동시에 가질 수 있는 상황을 만들어도 화면에는 항상 빨간색(알람)이 우선 표시된다",
+      "where": "lib/data.ts",
+      "parent": null,
+      "deps": [
+        "LB-108"
+      ],
+      "doc": "SPEC.md#제약",
+      "done_at": null,
+      "note": "우선순위는 알람 > 멈춤 > 정상. 색상 매핑 함수를 하나로 통일해 카드·이력 화면 전체에서 재사용한다 (화면마다 따로 만들지 않는다)"
+    },
+    {
+      "id": "LB-115",
+      "status": "todo",
+      "priority": "검증",
+      "category": "검증",
+      "title": "필수 필드 검증",
+      "summary": "완료: 멈춤·알람 레코드에 원인이 비어 있거나, 정상 레코드에 원인이 채워져 있으면 콘솔에 경고가 뜬다",
+      "where": "lib/data.ts",
+      "parent": null,
+      "deps": [
+        "LB-105"
+      ],
+      "doc": "SPEC.md#제약",
+      "done_at": null,
+      "note": "원인은 100자, 비고는 150자를 넘으면 경고. 조치 상태는 알람일 때만 채워져 있어야 한다"
+    },
+    {
+      "id": "LB-116",
+      "status": "todo",
+      "priority": "검증",
+      "category": "검증",
+      "title": "이상 설비 시각적 강조",
+      "summary": "완료: 대시보드에서 노란색·빨간색 카드에 정상 카드와 구분되는 테두리나 아이콘이 추가로 붙는다",
+      "where": "components/EquipmentCard.tsx",
+      "parent": null,
+      "deps": [
+        "LB-114"
+      ],
+      "doc": null,
+      "done_at": null,
+      "note": "색상만으로 구분하지 않는다 — 색맹 사용자도 알아볼 수 있게 테두리·아이콘 등 색 외의 표시를 하나 더 둔다"
+    },
+    {
+      "id": "LB-117",
+      "status": "todo",
+      "priority": "나중",
+      "category": "환경",
+      "title": "Vercel 배포",
+      "summary": "완료: Vercel에 배포되어 발급된 URL로 접속하면 대시보드가 정상 렌더링된다",
+      "where": ".",
+      "parent": null,
+      "deps": [
+        "LB-113"
+      ],
+      "doc": "PLAN.md#⑤",
+      "done_at": null,
+      "note": "PLAN.md 승인 지점 — 통계 화면(LB-113) 완료 후, 배포 진행 직전에 사용자 승인을 받는다"
+    },
+    {
+      "id": "LB-118",
+      "status": "todo",
+      "priority": "나중",
+      "category": "화면",
+      "title": "사용자 관리 화면",
+      "summary": "완료: `/users`에서 사용자 목록이 표시되고 추가·삭제가 된다",
+      "where": "app/users/page.tsx",
+      "parent": null,
+      "deps": [
+        "LB-102"
+      ],
+      "doc": null,
+      "done_at": null,
+      "note": "실 인증·권한 체계는 이번 범위 아님 — 로컬 목록 표시와 추가/삭제 동작만 확인한다"
+    }
+  ]
+}
