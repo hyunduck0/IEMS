@@ -1,1 +1,74 @@
 @import "tailwindcss";
+
+@theme {
+  --color-void: #0a0e14;
+  --color-panel: #131b24;
+  --color-panel-raised: #1a2430;
+  --color-grid: #223041;
+  --color-grid-bright: #33475c;
+  --color-signal: #38bdf8;
+  --color-signal-dim: #1c6f94;
+  --color-text: #e8edf2;
+  --color-muted: #7c8b9c;
+  --color-faint: #4a5a6b;
+  --color-normal: #2dd4bf;
+  --color-normal-dim: #123833;
+  --color-warn: #fbbf24;
+  --color-warn-dim: #3a2c0c;
+  --color-alarm: #fb3a4b;
+  --color-alarm-dim: #3a1116;
+}
+
+.font-hud {
+  font-family: var(--font-display), sans-serif;
+}
+
+.font-readout {
+  font-family: var(--font-mono), monospace;
+}
+
+body {
+  background-color: var(--color-void);
+  color: var(--color-text);
+  font-family: var(--font-body), sans-serif;
+  background-image:
+    linear-gradient(var(--color-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-grid) 1px, transparent 1px);
+  background-size: 40px 40px;
+  background-attachment: fixed;
+  background-position: -1px -1px;
+}
+
+@keyframes scan-sweep {
+  0% {
+    transform: translateX(-120%);
+  }
+  100% {
+    transform: translateX(120%);
+  }
+}
+
+.scan-sweep::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, currentColor, transparent);
+  opacity: 0.18;
+  width: 40%;
+  animation: scan-sweep 2.4s linear infinite;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .scan-sweep::after {
+    display: none;
+  }
+}

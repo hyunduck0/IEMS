@@ -57,7 +57,7 @@
     },
     {
       "id": "LB-103",
-      "status": "todo",
+      "status": "done",
       "priority": "핵심",
       "category": "화면",
       "title": "대시보드 뼈대 페이지",
@@ -73,7 +73,7 @@
     },
     {
       "id": "LB-104",
-      "status": "todo",
+      "status": "done",
       "priority": "핵심",
       "category": "저장",
       "title": "데이터 타입 정의",
@@ -89,7 +89,7 @@
     },
     {
       "id": "LB-105",
-      "status": "todo",
+      "status": "done",
       "priority": "핵심",
       "category": "저장",
       "title": "파이프 구분 텍스트 파서 작성",
@@ -105,7 +105,7 @@
     },
     {
       "id": "LB-106",
-      "status": "todo",
+      "status": "done",
       "priority": "핵심",
       "category": "저장",
       "title": "설비 현재 상태 샘플 데이터 생성",
@@ -121,7 +121,7 @@
     },
     {
       "id": "LB-107",
-      "status": "todo",
+      "status": "done",
       "priority": "핵심",
       "category": "저장",
       "title": "알람 이력 샘플 데이터 생성",
@@ -137,7 +137,7 @@
     },
     {
       "id": "LB-108",
-      "status": "todo",
+      "status": "done",
       "priority": "핵심",
       "category": "화면",
       "title": "EquipmentCard 컴포넌트 (텍스트 버전)",
@@ -154,7 +154,7 @@
     },
     {
       "id": "LB-109",
-      "status": "todo",
+      "status": "done",
       "priority": "핵심",
       "category": "화면",
       "title": "LineRow로 대시보드 18개 카드 렌더링",
@@ -170,7 +170,7 @@
     },
     {
       "id": "LB-110",
-      "status": "todo",
+      "status": "done",
       "priority": "핵심",
       "category": "화면",
       "title": "종합 이력 페이지",
@@ -187,7 +187,7 @@
     },
     {
       "id": "LB-111",
-      "status": "todo",
+      "status": "done",
       "priority": "핵심",
       "category": "화면",
       "title": "설비별 상세 이력 페이지",
@@ -204,7 +204,7 @@
     },
     {
       "id": "LB-112",
-      "status": "todo",
+      "status": "done",
       "priority": "핵심",
       "category": "저장",
       "title": "가동률 계산 함수",
@@ -220,7 +220,7 @@
     },
     {
       "id": "LB-113",
-      "status": "todo",
+      "status": "done",
       "priority": "핵심",
       "category": "화면",
       "title": "통계 화면",
@@ -237,7 +237,7 @@
     },
     {
       "id": "LB-114",
-      "status": "todo",
+      "status": "done",
       "priority": "검증",
       "category": "검증",
       "title": "상태 색상 우선순위 규칙 적용",
@@ -253,7 +253,7 @@
     },
     {
       "id": "LB-115",
-      "status": "todo",
+      "status": "done",
       "priority": "검증",
       "category": "검증",
       "title": "필수 필드 검증",
@@ -269,7 +269,7 @@
     },
     {
       "id": "LB-116",
-      "status": "todo",
+      "status": "done",
       "priority": "검증",
       "category": "검증",
       "title": "이상 설비 시각적 강조",
@@ -301,7 +301,7 @@
     },
     {
       "id": "LB-118",
-      "status": "todo",
+      "status": "done",
       "priority": "나중",
       "category": "화면",
       "title": "사용자 관리 화면",
@@ -314,6 +314,269 @@
       "doc": null,
       "done_at": null,
       "note": "실 인증·권한 체계는 이번 범위 아님 — 로컬 목록 표시와 추가/삭제 동작만 확인한다"
+    },
+    {
+      "id": "LB-119",
+      "status": "done",
+      "priority": "나중",
+      "category": "화면",
+      "title": "통계 화면 차트 라이브러리 교체",
+      "summary": "완료: /stats의 모든 그래프가 recharts 대신 react-chartjs-2(Chart.js)로 렌더링된다",
+      "where": "components/UtilizationChart.tsx",
+      "parent": "LB-113",
+      "deps": [
+        "LB-113"
+      ],
+      "doc": null,
+      "done_at": null,
+      "note": "사용자 요청으로 차트 라이브러리를 recharts에서 react-chartjs-2로 교체. package.json·SPEC.md 기술 스택 표도 함께 갱신"
+    },
+    {
+      "id": "LB-120",
+      "status": "done",
+      "priority": "나중",
+      "category": "화면",
+      "title": "통계 화면에 선그래프 추가",
+      "summary": "완료: /stats의 \"전체 가동률 추이\"(일별)가 막대그래프 대신 선그래프로 표시된다",
+      "where": "components/UtilizationChart.tsx",
+      "parent": "LB-119",
+      "deps": [
+        "LB-119"
+      ],
+      "doc": null,
+      "done_at": null,
+      "note": "UtilizationChart에 type: \"bar\"|\"line\" 옵션 추가, 시간 추이를 보여주는 차트만 선그래프로 전환"
+    },
+    {
+      "id": "LB-121",
+      "status": "done",
+      "priority": "나중",
+      "category": "화면",
+      "title": "상단 메뉴바 추가 및 대시보드 요약 현황 표시",
+      "summary": "완료: 모든 화면 상단에 홈·이력·통계·사용자관리 메뉴가 표시되고 페이지 이동 후에도 유지되며, 대시보드 상단에 라인 가동·정면·배면 요약 현황이 표시된다",
+      "where": "components/NavBar.tsx",
+      "parent": "LB-109",
+      "deps": [
+        "LB-109"
+      ],
+      "doc": null,
+      "done_at": null,
+      "note": "NavBar를 app/layout.tsx(루트 레이아웃)에 배치해 라우트 이동에도 언마운트되지 않도록 함. 라인 가동 = 정면+배면 모두 정상인 라인 수"
+    },
+    {
+      "id": "LB-122",
+      "status": "done",
+      "priority": "나중",
+      "category": "화면",
+      "title": "메뉴바 버튼·아이콘 스타일 적용",
+      "summary": "완료: 상단 메뉴 각 항목이 아이콘과 버튼 형태(테두리·호버 배경)로 표시된다",
+      "where": "components/NavBar.tsx",
+      "parent": "LB-121",
+      "deps": [
+        "LB-121"
+      ],
+      "doc": null,
+      "done_at": null,
+      "note": "이모지 아이콘(🏠📋📊👤) + 버튼 스타일(rounded border hover:bg-gray-100) 적용"
+    },
+    {
+      "id": "LB-123",
+      "status": "done",
+      "priority": "나중",
+      "category": "화면",
+      "title": "대시보드 요약 %표시 및 설비 카드 아이콘 추가",
+      "summary": "완료: 대시보드 요약 현황의 멈춤·알람·정상이 개수와 함께 %로 표시되고, 각 EquipmentCard에 설비 아이콘이 함께 표시된다",
+      "where": "app/page.tsx",
+      "parent": "LB-121",
+      "deps": [
+        "LB-121",
+        "LB-108"
+      ],
+      "doc": null,
+      "done_at": null,
+      "note": "아이콘은 자체 제작한 인라인 SVG(components/EquipmentIcon.tsx) 사용 — 외부 이미지·네트워크 의존 없음"
+    },
+    {
+      "id": "LB-124",
+      "status": "done",
+      "priority": "나중",
+      "category": "화면",
+      "title": "설비 카드 레이아웃 변경 (아이콘 좌측, 텍스트 우측)",
+      "summary": "완료: EquipmentCard에서 설비 아이콘이 왼쪽, 라인·상태 텍스트가 오른쪽에 가로로 배치된다",
+      "where": "components/EquipmentCard.tsx",
+      "parent": "LB-123",
+      "deps": [
+        "LB-123"
+      ],
+      "doc": null,
+      "done_at": null,
+      "note": "flex row + items-center로 아이콘(좌)·텍스트(우) 배치"
+    },
+    {
+      "id": "LB-125",
+      "status": "done",
+      "priority": "검증",
+      "category": "저장",
+      "title": "가동률 계산 로직 수정 (라인 단위 AND 조건) 및 샘플 데이터 재구성",
+      "summary": "완료: calculateUtilization이 한 라인의 정면·배면이 동시에 정상일 때만 가동으로 계산하고, 정면 또는 배면 중 하나라도 멈춤·알람이면 비가동으로 계산한다. 샘플 데이터도 정면·배면 양쪽에 이상이 섞여 이 로직을 검증할 수 있게 재구성되어 있다",
+      "where": "lib/data.ts",
+      "parent": "LB-112",
+      "deps": [
+        "LB-112",
+        "LB-107"
+      ],
+      "doc": null,
+      "done_at": null,
+      "note": "기존엔 정면·배면을 설비 단위로 각각 평균해 계산했으나, 사용자 지적에 따라 라인 단위로 두 이력을 병합해 AND 조건으로 재작성. scripts/generate-sample-data.ts의 LINE_PLAN도 함께 수정"
+    },
+    {
+      "id": "LB-126",
+      "status": "done",
+      "priority": "나중",
+      "category": "화면",
+      "title": "라인 가동 비중 조정 및 시간별(2시간) 가동 현황 표 추가",
+      "summary": "완료: 대시보드 라인 가동 비중이 약 50% 수준(4/9)이 되도록 샘플 데이터가 조정되고, /stats의 상세 표(일별) 아래에 2시간 간격 시간별 가동 현황 표가 추가된다",
+      "where": "app/stats/page.tsx",
+      "parent": "LB-125",
+      "deps": [
+        "LB-125",
+        "LB-113"
+      ],
+      "doc": null,
+      "done_at": null,
+      "note": "scripts/generate-sample-data.ts의 LINE_PLAN을 완전 가동 4라인으로 재조정(정상 9/이상 9 총 비율은 유지). lib/data.ts에 getHourlyUtilizationTimeline 추가"
+    },
+    {
+      "id": "LB-127",
+      "status": "done",
+      "priority": "나중",
+      "category": "화면",
+      "title": "시간별 가동 현황 1시간 간격 및 00~23시 표시로 변경",
+      "summary": "완료: /stats의 시간별 가동 현황 표가 2시간 간격 대신 1시간 간격으로, 당일 00시부터 23시까지 24행으로 표시된다",
+      "where": "lib/data.ts",
+      "parent": "LB-126",
+      "deps": [
+        "LB-126"
+      ],
+      "doc": null,
+      "done_at": null,
+      "note": "getHourlyUtilizationTimeline을 오늘 00시~24시 기준으로 재작성(기존엔 현재 시각 기준 롤링 24시간)"
+    },
+    {
+      "id": "LB-128",
+      "status": "done",
+      "priority": "나중",
+      "category": "화면",
+      "title": "사용자 관리 화면 고도화 (요약표 + 추가·수정·삭제 메뉴)",
+      "summary": "완료: /users 상단에 전체·관리자·운영자 인원 요약 표가 표시되고, 왼쪽에 사용자 추가·수정·삭제 아이콘 메뉴, 가운데에 이름·사번·권한 컬럼을 가진 사용자 목록 표가 표시되며 샘플 사용자 10명이 채워져 있다",
+      "where": "app/users/page.tsx",
+      "parent": "LB-118",
+      "deps": [
+        "LB-118"
+      ],
+      "doc": null,
+      "done_at": null,
+      "note": "실 인증·권한 체계는 이번 범위 아님 — 로컬 state 기반 추가/수정/삭제만 확인한다. 행 클릭으로 사용자를 선택한 뒤 수정·삭제 가능"
+    },
+    {
+      "id": "LB-129",
+      "status": "done",
+      "priority": "나중",
+      "category": "화면",
+      "title": "종합 이력 화면 라인 필터·표시 범위 설정 추가",
+      "summary": "완료: /history에서 라인 선택 콤보박스로 특정 라인만 필터링할 수 있고, 날짜 범위(시작~종료)와 표시 개수(10/20/50/전체)를 설정할 수 있으며, 전체 선택 시 20건 단위로 페이지네이션된다",
+      "where": "app/history/page.tsx",
+      "parent": "LB-110",
+      "deps": [
+        "LB-110"
+      ],
+      "doc": null,
+      "done_at": null,
+      "note": "라인 콤보박스(전체/1~9라인), 날짜 범위, 표시 개수(10/20/50/전체) 필터는 클라이언트 컴포넌트에서 처리. 정렬 기준(timestamp 내림차순)은 LB-110 그대로 유지"
+    },
+    {
+      "id": "LB-130",
+      "status": "done",
+      "priority": "핵심",
+      "category": "저장",
+      "title": "데이터 저장소를 파이프 구분 텍스트에서 로컬 PostgreSQL로 전환",
+      "summary": "완료: data/*.txt 대신 로컬 PostgreSQL(equipment_events 테이블)에서 대시보드·이력·설비상세·통계 데이터를 조회하며, 기존 화면 4개가 모두 이전과 동일하게 동작한다. SPEC.md·CLAUDE.md의 데이터 구조·제약 문구도 DB 기준으로 갱신된다",
+      "where": "lib/db.ts, lib/data.ts",
+      "parent": "LB-105",
+      "deps": [
+        "LB-105",
+        "LB-106",
+        "LB-107"
+      ],
+      "doc": "SPEC.md#데이터-구조",
+      "done_at": null,
+      "note": "사용자 요청으로 SPEC.md의 '외부 DB 연동 안 함' 제약을 먼저 수정한 뒤 진행. Homebrew로 로컬 PostgreSQL 16 설치, pg 드라이버 사용. 스냅샷/이력 두 파일을 유지하던 기존 구조 대신 events 단일 테이블 + 쿼리로 단순화(최신 상태는 DISTINCT ON으로 조회)"
+    },
+    {
+      "id": "LB-131",
+      "status": "done",
+      "priority": "나중",
+      "category": "화면",
+      "title": "전체 화면 미래지향적(관제실 HUD) 디자인 리스킨",
+      "summary": "완료: 대시보드/이력/설비상세/통계/사용자관리 5개 화면과 공용 컴포넌트(NavBar, EquipmentCard, LineRow, AlarmHistoryTable/Explorer, EquipmentHistoryList, UtilizationChart)가 다크 관제실(HUD) 톤의 공통 디자인 토큰(색상·폰트·모듈 스타일)으로 통일되어 렌더링된다",
+      "where": "app/globals.css, app/layout.tsx, components/",
+      "parent": null,
+      "deps": [
+        "LB-121"
+      ],
+      "doc": null,
+      "done_at": null,
+      "note": "설비 검사 관제실이라는 주제에서 끌어온 다크 HUD/회로 기판/스캔라인 톤. Tailwind v4 @theme로 토큰 정의, next/font로 Space Grotesk(디스플레이)·IBM Plex Sans(본문)·IBM Plex Mono(데이터) 조합"
+    },
+    {
+      "id": "LB-132",
+      "status": "done",
+      "priority": "나중",
+      "category": "화면",
+      "title": "샘플 데이터 재구성 및 통계 화면 확장(가동률 색상 임계값·7일 상세표·라인별 주간 파이차트·설비별 표)",
+      "summary": "완료: 샘플 데이터가 1·9라인 정상, 2라인 배면 알람, 3라인 정면 알람, 나머지 정상으로 재구성되고, 가동률 표시가 80% 이하 노란색·50% 이하 빨간색으로 구분되며, /stats 상세표가 7일치를 보여주고 그 아래 라인별 주간 가동/멈춤/알람 파이차트, 그 아래 라인×설비별 가동률 표가 순서대로 표시된다",
+      "where": "db/seed.ts, lib/data.ts, lib/status.ts, app/stats/page.tsx",
+      "parent": "LB-131",
+      "deps": [
+        "LB-125",
+        "LB-130"
+      ],
+      "doc": null,
+      "done_at": null,
+      "note": "라인별 상태 비율(정상/멈춤/알람)은 resolveStatus(정면,배면) 우선순위로 매 순간의 라인 상태를 판정해 시간 가중 집계. 설비별 표는 라인 AND 로직이 아닌 개별 설비(정면/배면) 각각의 단독 정상 비율"
+    },
+    {
+      "id": "LB-133",
+      "status": "done",
+      "priority": "나중",
+      "category": "화면",
+      "title": "샘플 데이터 추가 변경(4라인 배면 멈춤·5라인 전체 알람) 및 대시보드 배면 정상 비중·임계값 색상 추가",
+      "summary": "완료: 4라인 배면=멈춤, 5라인 정면·배면=알람으로 샘플 데이터가 반영되고, 대시보드 요약에 배면 정상 비중이 정면 정상과 동일한 형태로 표시되며, 라인 가동·정면 정상·배면 정상 퍼센트가 80% 이하 노란색·50% 이하 빨간색으로 구분된다",
+      "where": "db/seed.ts, app/page.tsx",
+      "parent": "LB-132",
+      "deps": [
+        "LB-132"
+      ],
+      "doc": null,
+      "done_at": null,
+      "note": "기존 2라인 배면 알람·3라인 정면 알람은 유지한 채 4·5라인만 추가. 임계값 색상은 lib/status.ts의 getUtilizationColorClass 재사용(멈춤/알람 퍼센트 칩은 기존 상태색 그대로 유지)"
+    },
+    {
+      "id": "LB-134",
+      "status": "done",
+      "priority": "핵심",
+      "category": "화면",
+      "title": "종합 이력 조치 입력 기능 추가 (조치 현황·조치 결과·조치 내용)",
+      "summary": "완료: /history의 멈춤·알람 행에 내용(원인)·조치 현황·조치 결과 컬럼이 표시되고, 행을 클릭하면 시간(기본값 현재)·담당자·조치 현황·조치 결과·조치 내용을 입력하는 화면으로 이동해 저장할 수 있으며, 저장된 조치는 이력 표에 즉시 반영된다",
+      "where": "db/migrations, lib/data.ts, app/history",
+      "parent": "LB-129",
+      "deps": [
+        "LB-129",
+        "LB-130"
+      ],
+      "doc": "SPEC.md#제약",
+      "done_at": null,
+      "note": "SPEC.md의 '값 입력·저장 기능 없음' 제약을 사용자 요청으로 완화(조치 보고만 예외로 허용). action_reports 테이블 신설(이벤트당 이력 누적), Server Action으로 저장. 담당자 목록은 사용자 관리 화면(클라이언트 로컬 상태)과 별개로 lib/assignees.ts 정적 목록 사용"
     }
   ]
 }

@@ -8,12 +8,18 @@ process.stdin.on("end", () => {
     process.exit(0);
   }
 
-  const toolName = payload.tool_name;
-  const filePath = (payload.tool_input && payload.tool_input.file_path) || "";
-  const isFileTool = ["Read", "Edit", "Write"].includes(toolName);
-  const targetsBacklog = filePath.replace(/\\/g, "/").endsWith("backlog.json");
+  // 도구 이름을 하드코딩한 화이트리스트(Read/Edit/Write 등) 대신, tool_input 안의 어떤 필드든
+  // backlog.json을 가리키면 막는다. 새 파일 편집 도구가 추가되거나 필드 이름이 달라져도
+  // (file_path가 아닌 path, notebook_path, edits[].file_path 등) 우회되지 않는다.
+  function targetsBacklog(value, depth = 0) {
+    if (value == null || depth > 4) return false;
+    if (typeof value === "string") return value.replace(/\\/g, "/").endsWith("backlog.json");
+    if (Array.isArray(value)) return value.some((v) => targetsBacklog(v, depth + 1));
+    if (typeof value === "object") return Object.values(value).some((v) => targetsBacklog(v, depth + 1));
+    return false;
+  }
 
-  if (isFileTool && targetsBacklog) {
+  if (targetsBacklog(payload.tool_input)) {
     process.stdout.write(
       JSON.stringify({
         hookSpecificOutput: {

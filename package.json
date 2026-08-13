@@ -7,16 +7,22 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "db:migrate": "for f in db/migrations/*.sql; do psql -d iems -f \"$f\"; done",
+    "db:seed": "node --env-file=.env.local db/seed.ts"
   },
   "dependencies": {
+    "chart.js": "^4.5.1",
     "next": "^16.3.0",
+    "pg": "^8.23.0",
     "react": "^19.2.8",
+    "react-chartjs-2": "^5.3.1",
     "react-dom": "^19.2.8"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.3.3",
     "@types/node": "^26.2.0",
+    "@types/pg": "^8.21.0",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.4",
     "autoprefixer": "^10.5.4",

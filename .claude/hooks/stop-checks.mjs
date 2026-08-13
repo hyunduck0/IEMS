@@ -28,7 +28,12 @@ function run(cmd, args) {
 }
 
 function listCodeFiles() {
-  const result = execFileSync("git", ["ls-files"], { encoding: "utf8" });
+  // --others --exclude-standard: tracked 파일뿐 아니라 아직 git add되지 않은
+  // 미추적 파일도 포함한다(gitignore된 파일은 계속 제외). 그렇지 않으면 새로
+  // 만든 파일이 300줄 제한 검사에서 통째로 빠진다.
+  const result = execFileSync("git", ["ls-files", "--cached", "--others", "--exclude-standard"], {
+    encoding: "utf8",
+  });
   return result
     .split("\n")
     .filter(Boolean)
